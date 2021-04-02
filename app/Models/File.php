@@ -13,4 +13,12 @@ class File extends Model
     {
         return $this->morphTo();
     }
+
+    /**
+     * Get the file's user
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

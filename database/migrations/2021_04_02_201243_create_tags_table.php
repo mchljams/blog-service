@@ -18,6 +18,8 @@ class CreateTagsTable extends Migration
             $table->integer('post_id')->unsigned()->index();
             $table->foreign('post_id')->references('id')->on('posts')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
