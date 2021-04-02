@@ -9,6 +9,15 @@ class File extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'file_path'
+    ];
+
     public function path()
     {
         return $this->morphTo();
