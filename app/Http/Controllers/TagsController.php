@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Http\Requests\DeleteTagRequest;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
@@ -24,7 +25,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        //
+        return Tag::all();
     }
 
     /**

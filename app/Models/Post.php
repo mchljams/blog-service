@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Uuids;
 use App\Models\User;
 use App\Models\Tag;
 use App\Models\File;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, Uuids;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +21,8 @@ class Post extends Model
     protected $fillable = [
         'title',
         'body',
-        'file_id'
+        'file_id',
+        'user_id'
     ];
 
     /**

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Http\Requests\DeletePostRequest;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -24,7 +26,16 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        try {
+
+            $posts = Post::all();
+
+            return response()->json($posts, 200);
+
+        } catch (\Exception $e) {
+
+            return response()->json([], 404);
+        }
     }
 
     /**
@@ -35,7 +46,21 @@ class PostsController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        try {
+
+            $data = $request->validated();
+            $data['user_id'] = Auth::user()->id;
+
+            $post = Post::create($data);
+
+            return response()->json($post, 201);
+
+
+        } catch (\Exception $e) {
+
+            return response()->json([], 404);
+        }
+
     }
 
     /**
@@ -46,7 +71,16 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+
+            $post = Post::findOrFail($id);
+
+            return response()->json($post, 200);
+
+        } catch (\Exception $e) {
+
+            return response()->json([], 404);
+        }
     }
 
     /**
@@ -58,7 +92,21 @@ class PostsController extends Controller
      */
     public function update(UpdatePostRequest $request, $id)
     {
-        //
+
+        try {
+            $data = $request->validated();
+
+            Post::where('id', $id)
+                ->where('user_id', Auth::user()->id)
+                ->firstOrFail()
+                ->update($data);
+
+            return response()->json([], 202);
+
+        } catch (\Exception $e) {
+
+            return response()->json([], 400);
+        }
     }
 
     /**
@@ -70,6 +118,15 @@ class PostsController extends Controller
      */
     public function destroy(DeletePostRequest $request, $id)
     {
-        //
+        try {
+
+            Post::where('user_id', Auth::user()->id)->firstOrFail()->delete();
+
+            return response()->json([], 204);
+
+        } catch (\Exception $e) {
+
+            return response()->json([], 400);
+        }
     }
 }

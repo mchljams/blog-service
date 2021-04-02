@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Http\Requests\DeleteFileRequest;
 use App\Http\Requests\StoreFileRequest;
 
@@ -23,7 +24,7 @@ class FilesController extends Controller
      */
     public function index()
     {
-        //
+        return File::all();
     }
 
     /**
