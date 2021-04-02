@@ -8,6 +8,15 @@ use App\Http\Requests\StoreFileRequest;
 class FilesController extends Controller
 {
     /**
+     * Create a new FilesController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

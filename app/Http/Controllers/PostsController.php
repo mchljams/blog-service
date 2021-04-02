@@ -9,6 +9,15 @@ use App\Http\Requests\UpdatePostRequest;
 class PostsController extends Controller
 {
     /**
+     * Create a new PostsController instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
