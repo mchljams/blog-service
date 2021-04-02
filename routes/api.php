@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FilesController;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\TagsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +32,16 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
+
+    Route::resource('files', FilesController::class)->only([
+        'index', 'show', 'store', 'destroy'
+    ]);
+
+    Route::resource('posts', PostsController::class)->only([
+        'index', 'show', 'store', 'update', 'destroy'
+    ]);;
+
+    Route::resource('tags', TagsController::class)->only([
+        'index', 'show', 'store', 'update', 'destroy'
+    ]);;
 });
