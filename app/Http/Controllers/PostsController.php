@@ -94,7 +94,6 @@ class PostsController extends Controller
      */
     public function update(UpdatePostRequest $request, $id)
     {
-
         try {
             $data = $request->validated();
 
@@ -122,7 +121,10 @@ class PostsController extends Controller
     {
         try {
 
-            Post::where('user_id', Auth::user()->id)->firstOrFail()->delete();
+            Post::where('id', $id)
+                ->where('user_id', Auth::user()->id)
+                ->firstOrFail()
+                ->delete();
 
             return response()->json([], 204);
 

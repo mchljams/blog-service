@@ -15,8 +15,8 @@ it will likely have my test data in it too)
 
 Here are the items that I would have liked to flush out more
 
-* If a user can only update and delete thier own tags, can 
-they use other users tags on thier posts? Or can they only tag with 
+* If a user can only update and delete their own tags, can 
+they use other users tags on their posts? Or can they only tag with 
 the tags they have created? OR is it that an admin will define the set 
 of tags that a user may choose from?
 * having the JWT token returned on create and update from thr resource
@@ -30,10 +30,10 @@ of tags that a user may choose from?
 * I really like the laravel swagger package. Id probably start 
 integrating that to automatically generate the API docs. Although 
 I have not tried with L8 so not sure if its supported.
-* If I was taking my time id spend more time on comments and docblock
+* If I was taking my time I'd spend more time on comments and docblock
 
 ## What would I have done differently
 
 * I would have used a tagging package, rather than building that from scratch.
-* Maybe looked for images package? Or worked that first. Thats an area I have not 
+* Maybe looked for images package? Or worked that first. That's an area I have not 
 really spent much time on in the past.

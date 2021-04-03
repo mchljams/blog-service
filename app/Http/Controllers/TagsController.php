@@ -6,6 +6,7 @@ use App\Models\Tag;
 use App\Http\Requests\DeleteTagRequest;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
+use App\Http\Resources\TagResource;
 use Illuminate\Support\Facades\Auth;
 
 class TagsController extends Controller
@@ -37,7 +38,7 @@ class TagsController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        //try {
+        try {
 
             $data = $request->validated();
             $data['user_id'] = Auth::user()->id;
@@ -47,10 +48,10 @@ class TagsController extends Controller
             return response()->json($post, 201);
 
 
-//        } catch (\Exception $e) {
-//
-//            return response()->json([], 404);
-//        }
+        } catch (\Exception $e) {
+
+            return response()->json([], 404);
+        }
     }
 
     /**
@@ -61,7 +62,18 @@ class TagsController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+
+            $tag = Tag::with(['user'])->findOrFail($id);
+
+            $resource = new TagResource($tag);
+
+            return response()->json($resource, 200);
+
+        } catch (\Exception $e) {
+
+            return response()->json([], 404);
+        }
     }
 
     /**
@@ -73,7 +85,20 @@ class TagsController extends Controller
      */
     public function update(UpdateTagRequest $request, $id)
     {
-        //
+        try {
+            $data = $request->validated();
+
+            Tag::where('id', $id)
+                ->where('user_id', Auth::user()->id)
+                ->firstOrFail()
+                ->update($data);
+
+            return response()->json([], 202);
+
+        } catch (\Exception $e) {
+
+            return response()->json([], 400);
+        }
     }
 
     /**
@@ -85,6 +110,18 @@ class TagsController extends Controller
      */
     public function destroy(DeleteTagRequest $request, $id)
     {
-        //
+        try {
+
+            Tag::where('id', $id)
+                ->where('user_id', Auth::user()->id)
+                ->firstOrFail()
+                ->delete();
+
+            return response()->json([], 204);
+
+        } catch (\Exception $e) {
+
+            return response()->json([], 400);
+        }
     }
 }
