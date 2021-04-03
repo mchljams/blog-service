@@ -18,7 +18,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'email' => $this->email,
             'name' => $this->name,
-            'token' => 'JWT_TOKEN' // not 100% sure how to get the token on create or update only yet
+            //'token' => 'JWT_TOKEN' // not 100% sure how to get the token on create or update only yet
         ];
     }
 }

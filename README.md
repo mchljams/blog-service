@@ -7,7 +7,7 @@
 
 ## Testing
 
-I tested my progress with postman, my collection is committed in the root of the project.
+I tested my progress with postman, my collection is committed in the root of the project (postman.json).
 (I didn't have time to parameterize it or create an environment configuration so
 it will likely have my test data in it too)
 
@@ -20,17 +20,19 @@ they use other users tags on their posts? Or can they only tag with
 the tags they have created? OR is it that an admin will define the set 
 of tags that a user may choose from?
 * having the JWT token returned on create and update from thr resource
+* I think I was worried about an actual file upload, but probably could have just
+stubbed it in with a string filename to get the enpoints working.
 
 
 ##  What I would do next
 
-* get the user logout route working
-* get a proper error response set up when a user is not authenticated
+
 * start writing the API integration tests and make use of factories
 * I really like the laravel swagger package. Id probably start 
 integrating that to automatically generate the API docs. Although 
 I have not tried with L8 so not sure if its supported.
 * If I was taking my time I'd spend more time on comments and docblock
+* get the user logout route working
 
 ## What would I have done differently
 

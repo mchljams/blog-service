@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\TagCollection;
 
 class PostResource extends JsonResource
 {
@@ -21,7 +22,7 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'body' => $this->body,
             'owner' => new UserResource($this->user),
-            'tags' => $this->tags
+            'tags' => new TagCollection($this->tags)
         ];
     }
 }

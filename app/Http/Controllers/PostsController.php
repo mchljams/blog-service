@@ -7,6 +7,8 @@ use App\Models\Post;
 use App\Http\Requests\DeletePostRequest;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Http\Requests\TagPostRequest;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
@@ -132,5 +134,24 @@ class PostsController extends Controller
 
             return response()->json([], 400);
         }
+    }
+
+    public function tag(TagPostRequest $request, $id)
+    {
+        //try {
+            $data = $request->validated();
+
+            $tag = Tag::findOrFail($data['tag_id']);
+
+            $post = Post::findOrFail($id);
+
+            $post->tags()->save($tag);
+
+            return response()->json([], 201);
+
+//        } catch (\Exception $e) {
+//
+//            return response()->json([], 400);
+//        }
     }
 }

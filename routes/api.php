@@ -43,9 +43,14 @@ Route::group([
         'index', 'show', 'store', 'destroy'
     ]);
 
+
+    Route::post('/posts/{post}/tag', [PostsController::class, 'tag'])->name('posts.tag');
+
     Route::resource('posts', PostsController::class)->only([
         'index', 'show', 'store', 'update', 'destroy'
     ]);;
+
+
 
     Route::resource('tags', TagsController::class)->only([
         'index', 'show', 'store', 'update', 'destroy'
