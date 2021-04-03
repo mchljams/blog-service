@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Http\Requests\DeletePostRequest;
 use App\Http\Requests\StorePostRequest;
@@ -60,7 +61,6 @@ class PostsController extends Controller
 
             return response()->json([], 404);
         }
-
     }
 
     /**
@@ -73,9 +73,11 @@ class PostsController extends Controller
     {
         try {
 
-            $post = Post::findOrFail($id);
+            $post = Post::with(['user'])->findOrFail($id);
 
-            return response()->json($post, 200);
+            $resource = new PostResource($post);
+
+            return response()->json($resource, 200);
 
         } catch (\Exception $e) {
 

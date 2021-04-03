@@ -6,6 +6,7 @@ use App\Models\Tag;
 use App\Http\Requests\DeleteTagRequest;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TagsController extends Controller
 {
@@ -36,7 +37,20 @@ class TagsController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        //
+        //try {
+
+            $data = $request->validated();
+            $data['user_id'] = Auth::user()->id;
+
+            $post = Tag::create($data);
+
+            return response()->json($post, 201);
+
+
+//        } catch (\Exception $e) {
+//
+//            return response()->json([], 404);
+//        }
     }
 
     /**

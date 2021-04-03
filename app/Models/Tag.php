@@ -8,6 +8,9 @@ use App\Models\Post;
 
 class Tag extends Model
 {
+
+    protected $table = 'tags';
+
     use HasFactory;
 
     /**
@@ -17,13 +20,9 @@ class Tag extends Model
      */
     protected $fillable = [
         'post_id',
-        'name'
+        'name',
+        'user_id'
     ];
-
-    public function posts()
-    {
-        return $this->belongsToMany(Post::class);
-    }
 
     /**
      * Get the tag's user
@@ -31,5 +30,13 @@ class Tag extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the posts with the tag
+     */
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
     }
 }

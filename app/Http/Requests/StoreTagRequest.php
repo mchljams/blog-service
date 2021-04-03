@@ -13,7 +13,7 @@ class StoreTagRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreTagRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'post_id' => 'required|uuid|exists:posts,id',
+            'name' => 'required|string',
         ];
     }
 }
